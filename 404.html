@@ -4,22 +4,25 @@
     <meta charset="utf-8">
     <title>Chinese Modern History Explorer</title>
     <script>
-      // Get path
-      const path = window.location.pathname;
+      // Store the current path in sessionStorage
+      sessionStorage.setItem('spa-path', window.location.pathname);
       
-      // Basic redirect to language routes
-      if (path.startsWith('/en/') || path === '/en') {
-        window.location.href = '/en';
-      } else if (path.startsWith('/zh/') || path === '/zh') {
-        window.location.href = '/zh';
-      } else {
-        // Default to English
-        window.location.href = '/en';
+      // Determine the language for initial redirect
+      const path = window.location.pathname;
+      let lang = 'en'; // Default language
+      
+      // Check if path starts with a language code
+      if (path.startsWith('/zh/')) {
+        lang = 'zh';
+      } else if (path.startsWith('/en/')) {
+        lang = 'en';
       }
+      
+      // Redirect to the base language route
+      window.location.href = '/' + lang;
     </script>
   </head>
   <body>
-    <h1>Page Not Found</h1>
-    <p>Redirecting to the home page...</p>
+    <h1>Redirecting...</h1>
   </body>
 </html>
