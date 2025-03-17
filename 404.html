@@ -11,14 +11,24 @@
       const path = window.location.pathname;
       let lang = 'en'; // Default language
       
-      // Check if path starts with a language code
+      // First check if path starts with a language code
       if (path.startsWith('/zh/')) {
         lang = 'zh';
       } else if (path.startsWith('/en/')) {
         lang = 'en';
+      } else {
+        // If no language in path, use saved preference
+        try {
+          const savedLang = localStorage.getItem('preferred-language');
+          if (savedLang === 'zh' || savedLang === 'en') {
+            lang = savedLang;
+          }
+        } catch (e) {
+          console.error('Error accessing localStorage:', e);
+        }
       }
       
-      // Redirect to the base language route
+      // Redirect to the appropriate language route
       window.location.href = '/' + lang;
     </script>
   </head>
