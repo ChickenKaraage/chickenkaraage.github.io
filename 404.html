@@ -1,38 +1,35 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Chinese Modern History Explorer</title>
-    <script>
-      // Store the current path in sessionStorage
-      sessionStorage.setItem('spa-path', window.location.pathname);
-      
-      // Determine the language for initial redirect
+<head>
+  <meta charset="utf-8">
+  <title>Page Not Found - Chinese Modern History Explorer</title>
+  <script>
+    (function() {
       const path = window.location.pathname;
-      let lang = 'en'; // Default language
-      
-      // First check if path starts with a language code
-      if (path.startsWith('/zh/')) {
-        lang = 'zh';
-      } else if (path.startsWith('/en/')) {
-        lang = 'en';
-      } else {
-        // If no language in path, use saved preference
-        try {
-          const savedLang = localStorage.getItem('preferred-language');
-          if (savedLang === 'zh' || savedLang === 'en') {
-            lang = savedLang;
-          }
-        } catch (e) {
-          console.error('Error accessing localStorage:', e);
-        }
+      if (path.split("/").length > 2) {
+        sessionStorage.setItem("spa-path", path);
+        sessionStorage.setItem("spa-timestamp", Date.now().toString());
       }
       
-      // Redirect to the appropriate language route
-      window.location.href = '/' + lang;
-    </script>
-  </head>
-  <body>
-    <h1>Redirecting...</h1>
-  </body>
+      let lang = "en";
+      if (path.startsWith("/zh/")) {
+        lang = "zh";
+      } else if (path.startsWith("/en/")) {
+        lang = "en";
+      } else {
+        try {
+          const savedLang = localStorage.getItem("preferred-language");
+          if (savedLang === "zh" || savedLang === "en") {
+            lang = savedLang;
+          }
+        } catch (e) {}
+      }
+      
+      window.location.href = "/" + lang;
+    })();
+  </script>
+</head>
+<body>
+  <h1>Redirecting...</h1>
+</body>
 </html>
