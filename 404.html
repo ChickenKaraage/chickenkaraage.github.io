@@ -1,49 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>Chinese Modern History Explorer</title>
-  <script>
-    // SPA routing for GitHub Pages
-    (function() {
-      // Check if we're already in a redirect loop
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.has('no_redirect')) {
-        // If we're already trying to prevent redirect loops, just stop
-        document.addEventListener('DOMContentLoaded', function() {
-          document.body.innerHTML = '<div style="text-align: center; margin: 50px auto; max-width: 600px;">' +
-            '<h1>Page Not Found</h1>' +
-            '<p>The page you requested could not be found.</p>' +
-            '<p>You can try visiting the <a href="/">home page</a> or selecting a language below:</p>' +
-            '<p><a href="/en">English</a> | <a href="/zh">中文</a></p>' +
-            '</div>';
-        });
-        return;
-      }
-
-      // For SPAs, we redirect to index.html with the current path as a URL parameter
+  <head>
+    <meta charset="utf-8">
+    <title>Chinese Modern History Explorer</title>
+    <script>
+      // Get path
       const path = window.location.pathname;
       
-      // If we're already at the root or a language route, don't redirect
-      if (path === '/' || path === '/en' || path === '/zh') {
-        return;
+      // Basic redirect to language routes
+      if (path.startsWith('/en/') || path === '/en') {
+        window.location.href = '/en';
+      } else if (path.startsWith('/zh/') || path === '/zh') {
+        window.location.href = '/zh';
+      } else {
+        // Default to English
+        window.location.href = '/en';
       }
-      
-      // If this is a language path, preserve it
-      if (path.startsWith('/en/') || path.startsWith('/zh/')) {
-        // This is a special case for the SPA - we redirect to the base language
-        const lang = path.startsWith('/en/') ? 'en' : 'zh';
-        window.location.href = '/' + lang + '?no_redirect=true';
-        return;
-      }
-      
-      // Default to English for unknown paths
-      window.location.href = '/?no_redirect=true';
-    })();
-  </script>
-</head>
-<body>
-  <h1>Chinese Modern History Explorer</h1>
-  <p>Redirecting...</p>
-</body>
+    </script>
+  </head>
+  <body>
+    <h1>Page Not Found</h1>
+    <p>Redirecting to the home page...</p>
+  </body>
 </html>
